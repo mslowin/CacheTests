@@ -1,0 +1,93 @@
+﻿@page "/fetchdata"
+@using CacheTest.Data
+@using CacheTest.Extensions
+@inject WeatherForecastService ForecastService
+@inject IDistributedCache cache
+<PageTitle>Weather forecast</PageTitle>
+
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+<button class="btn btn-primary" @onclick="LoadForecast">Load Forecast</button>
+
+@* // This is the cached data *@
+@*<h2>Ticks</h2>
+<p>@ticks</p>
+<img src="~/hmmmmm.png" />*@
+@if (forecasts is null && loadLocation == "") // data wasnt pulled nether from api and cache
+{
+    <p><em>Click the button to load the forecast</em></p>
+}
+else if (forecasts is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="h3 @isCacheData">@loadLocation</div> 
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+    private string? loadLocation = "";       // Location where we load our data from
+    private string isCacheData = "";
+    ////string ticks;
+
+    ////protected override async Task OnInitializedAsync()
+    ////{
+    ////    forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    ////    ////ticks = ForecastService.GetSetSampleCache();
+    ////}
+
+    private async Task LoadForecast()
+    {
+        forecasts = null;
+        loadLocation = null;
+
+        string recordKey = "WeatherForecast_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+
+        forecasts = await cache.GetRecordAsync<WeatherForecast[]>(recordKey);
+
+        if (forecasts is null)
+        {
+            forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+
+            loadLocation = $"Loaded from API at {DateTime.Now}";
+            isCacheData = "";
+
+            await cache.SetRecordAsync(recordKey, forecasts);
+        }
+        else
+        {
+            loadLocation = $"Loaded from cache at {DateTime.Now}";
+            isCacheData = "text-danger";
+            
+        }
+
+    }
+}

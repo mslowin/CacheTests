@@ -1,0 +1,59 @@
+﻿@page "/show-image-1"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@inject ProtectedLocalStorage ProtectedLocalStorage
+
+<h1>Dynamic Image Source Example</h1>
+
+@if (imageSource is not null)
+{
+        <p>
+            <img src="@imageSource" />
+        </p>
+}
+
+@for (var i = 1; i <= 4; i++)
+{
+    var imageId = i;
+        <button @onclick="() => ShowImage(imageId)">
+            Image @imageId
+        </button>
+}
+
+<br />
+<button class="btn btn-primary" type="button" @onclick="StoreValueAsync">Store value</button>
+<br />
+<button class="btn btn-primary" type="button" @onclick="GetValueAsync">Get value</button>
+<p1>@value</p1>
+<br />
+<button class="btn btn-primary" type="button" @onclick="DeleteValueAsync">Delete value</button>
+
+@code {
+    private string? imageSource;
+    private string? value;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await GetValueAsync();
+    }
+
+    private void ShowImage(int id)
+    {
+        imageSource = $"images/image{id}.png";
+    }
+
+    public async Task StoreValueAsync()
+    {
+        await ProtectedLocalStorage.SetAsync("BlazorSchool", "Blazor Tutorials 2023");
+    }
+
+    public async Task GetValueAsync()
+    {
+        var result = await ProtectedLocalStorage.GetAsync<string>("BlazorSchool");
+        value = result.Value;
+    }
+
+    public async Task DeleteValueAsync()
+    {
+        await ProtectedLocalStorage.DeleteAsync("BlazorSchool");
+    }
+}

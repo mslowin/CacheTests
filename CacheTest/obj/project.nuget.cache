@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "VD5m1ra2CLy5kVFg1cyQwqeHhrRn8+COMKERCCSCSLH8GIB9KENVjRA7TOc4nspM9LnxUyWAw+4Zw+JlfvN08w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\michalsl\\Documents\\Programy\\CacheTest\\CacheTest.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\michalsl\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\microsoft.extensions.caching.stackexchangeredis\\7.0.5\\microsoft.extensions.caching.stackexchangeredis.7.0.5.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\microsoft.extensions.options\\7.0.1\\microsoft.extensions.options.7.0.1.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.2\\pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\stackexchange.redis\\2.6.111\\stackexchange.redis.2.6.111.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
+    "C:\\Users\\michalsl\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
